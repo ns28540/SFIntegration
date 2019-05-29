@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_UMB7UPhREeaEp75sNSxjvA" targetNamespace="http://tns.tibco.com/bw/composite/SFIntegration" name="SFIntegration" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_-PJ-4PhREeaEp75sNSxjvA" name="contact" promote="ComponentCreateContact/contact">
+    <sca:interface.wsdl xmi:id="_-PU-APhREeaEp75sNSxjvA" interface="http://xmlns.example.com/20170221111802PLT#wsdl.interface(contact)" scaext:wsdlLocation="../Processes/sfintegration/CreateContact.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_-PgkMPhREeaEp75sNSxjvA" name="RestService" path="/contact" docBasePath="http://localhost:7777/SFIntegration" docResourcePath="Contact" basePath="/" connector="sfintegration.Contact" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/sfintegration.CreateContact-Contact.json">
+      <operation xmi:id="_-Pmq0PhREeaEp75sNSxjvA" operationName="post" nickname="post-contact" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_-ccM8PhREeaEp75sNSxjvA"/>
+      <advancedConfig xmi:id="_o0tn0IHBEemCIfX1XkK1tg" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_-Pmq0fhREeaEp75sNSxjvA" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_U5gFUPhREeaEp75sNSxjvA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_U5uu0PhREeaEp75sNSxjvA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_U5znUPhREeaEp75sNSxjvA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_U54f0PhREeaEp75sNSxjvA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_U59_YPhREeaEp75sNSxjvA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_U6CQ0PhREeaEp75sNSxjvA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_YoWVoPhREeaEp75sNSxjvA" name="salesforce.wsdl" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_blSn4PhREeaEp75sNSxjvA" name="sf.user" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_eLDwQPhREeaEp75sNSxjvA" name="sf.password" type="property:password" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ubLBkIHjEemCIfX1XkK1tg" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ueCvYIHjEemCIfX1XkK1tg" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ueIO8IHjEemCIfX1XkK1tg" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ueKrMIHjEemCIfX1XkK1tg" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:component xmi:id="_UkCysPhREeaEp75sNSxjvA" name="ComponentCreateContact" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_UkEA0PhREeaEp75sNSxjvA" processName="sfintegration.CreateContact"/>
+    <sca:service xmi:id="_-PEfUPhREeaEp75sNSxjvA" name="contact">
+      <sca:interface.wsdl xmi:id="_-PFGYPhREeaEp75sNSxjvA" interface="http://xmlns.example.com/20170221111802PLT#wsdl.interface(contact)" scaext:wsdlLocation="../Processes/sfintegration/CreateContact.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
