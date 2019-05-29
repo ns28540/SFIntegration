@@ -1,0 +1,75 @@
+{
+	"name" : "SFIntegration.application",
+	"version" : "1.0",
+	"type" : "ipaas",
+	"endpoints" : [
+		{
+			"name" : "Contact",
+			"protocol" : "http",
+			"port" : "18080",
+			"spec" : {
+				"name" : "SFIntegration.application",
+				"version" : "v1"
+			},
+			"swagger" : {
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "Salesforce contact",
+    "description" : "Salesforce contact"
+  },
+  "host" : "localhost:18080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/contact" : {
+      "post" : {
+        "summary" : "",
+        "description" : "",
+        "operationId" : "post-contact",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/Contact"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Contact" : {
+      "type" : "object",
+      "required" : [ "FirstName", "LastName" ],
+      "properties" : {
+        "LastName" : {
+          "type" : "string"
+        },
+        "FirstName" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
+		},
+		{
+			"type" : "private",
+			"pingable" : true,
+			"protocol" : "http",
+			"port" : "7777"
+		}
+	]
+}
