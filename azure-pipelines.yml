@@ -1,0 +1,36 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  name: 'Default'
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'SFIntegration.application.parent/pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean package'
+
+- task: CmdLine@2
+  inputs:
+    script: 'cp /Users/nsurana/azureagent/_work/2/s/manifest.json /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0/manifest.json'
+
+- task: CmdLine@2
+  inputs:
+    script: 'cp /Users/nsurana/azureagent/_work/2/s/SFIntegration.application/target/SFIntegration.application_1.0.0.ear /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0/SFIntegration.application_1.0.0.ear'
+
+- task: CmdLine@2
+  inputs:
+    script: 'expect deploy.exp /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0'
+    workingDirectory: '/Users/nsurana/CICS_Setup/CI/build/TCI'
+    
