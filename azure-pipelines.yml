@@ -12,6 +12,9 @@ variables:
 trigger:
 - master
 
+env:
+    MY_MAPPED_ENV_VAR: $(mySecret)
+
 # name of the agent pool to be used, i configured my mac under default pool
 pool:
   name: 'Default'
@@ -37,6 +40,12 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'cp $(Build.SourcesDirectory)/$(AppName)/target/$(AppName)_$(AppVersion).ear $(deployArtifactDir)/$(AppName)_$(AppVersion)/$(AppName)_$(AppVersion).ear'
+
+#execute the deploy script to 
+- task: CmdLine@2
+  inputs:
+    script: 'expect login.exp $(mySecret)'
+    workingDirectory: $(scriptDir)
 
 #execute the deploy script to 
 - task: CmdLine@2
