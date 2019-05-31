@@ -49,7 +49,7 @@ steps:
   env:
     MySecretEnv: $(mySecret)
   inputs:
-    script: 'expect login.exp $(username) $(MySecretEnv)'
+    script: 'expect login.exp $(username) $MySecretEnv'
     workingDirectory: $(scriptDir)
 
 #execute the deploy script to 
