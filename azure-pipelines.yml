@@ -2,17 +2,25 @@
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Set variables once
+variables:
+  scriptDir: /Users/nsurana/azureagent/scripts
+  AppName: SFIntegration.application
+  AppVersion: 1.0.0
+  deployArtifactDir: /Users/nsurana/azureagent/deploy
 
 trigger:
 - master
 
+# name of the agent pool to be used, i configured my mac under default pool
 pool:
   name: 'Default'
 
+#provide the pom file and build goals
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'SFIntegration.application.parent/pom.xml'
+    mavenPomFile: '$(AppName).parent/pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
@@ -21,18 +29,20 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean package'
 
+#copy manifest.json and ear file to a common folder
 - task: CmdLine@2
   inputs:
-    script: 'cp $(Build.SourcesDirectory)/manifest.json /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0/manifest.json'
+    script: 'cp $(Build.SourcesDirectory)/manifest.json $(deployArtifactDir)/$(AppName)_$(AppVersion)/manifest.json'
 
 - task: CmdLine@2
   inputs:
-    script: 'cp $(Build.SourcesDirectory)/SFIntegration.application/target/SFIntegration.application_1.0.0.ear /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0/SFIntegration.application_1.0.0.ear'
+    script: 'cp $(Build.SourcesDirectory)/$(AppName)/target/$(AppName)_$(AppVersion).ear $(deployArtifactDir)/$(AppName)_$(AppVersion)/$(AppName)_$(AppVersion).ear'
 
+#execute the deploy script to 
 - task: CmdLine@2
   inputs:
-    script: 'expect deploy.exp /Users/nsurana/azureagent/deploy/SFIntegration.application_1.0.0'
-    workingDirectory: '/Users/nsurana/azureagent/scripts'
+    script: 'expect deploy.exp $(deployArtifactDir)/$(AppName)_$(AppVersion)
+    workingDirectory: $(scriptDir)
 
 
     
