@@ -2,18 +2,19 @@
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
 # Set variables once
 variables:
   scriptDir: /Users/nsurana/azureagent/scripts
   AppName: SFIntegration.application
   AppVersion: 1.0.0
   deployArtifactDir: /Users/nsurana/azureagent/deploy
+  mySecret: Tibco2020
 
 trigger:
 - master
 
-env:
-    MY_MAPPED_ENV_VAR: $(mySecret)
+
 
 # name of the agent pool to be used, i configured my mac under default pool
 pool:
@@ -21,6 +22,7 @@ pool:
 
 #provide the pom file and build goals
 steps:
+
 - task: Maven@3
   inputs:
     mavenPomFile: '$(AppName).parent/pom.xml'
@@ -44,7 +46,7 @@ steps:
 #execute the deploy script to 
 - task: CmdLine@2
   inputs:
-    script: 'expect login.exp $env:MY_MAPPED_ENV_VAR'
+    script: 'expect login.exp $(mySecret)'
     workingDirectory: $(scriptDir)
 
 #execute the deploy script to 
