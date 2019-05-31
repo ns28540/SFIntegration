@@ -46,8 +46,10 @@ steps:
 
 #execute the deploy script to 
 - task: CmdLine@2
+  env:
+    MySecretEnv: $(mySecret)
   inputs:
-    script: 'expect login.exp $(username) $(mySecret)'
+    script: 'expect login.exp $(username) $(MySecretEnv)'
     workingDirectory: $(scriptDir)
 
 #execute the deploy script to 
