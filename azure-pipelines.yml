@@ -9,6 +9,7 @@ variables:
   AppName: SFIntegration.application
   AppVersion: 1.0.0
   deployArtifactDir: /Users/nsurana/azureagent/deploy
+  username: nsurana@tibco.com
   mySecret: Tibco2020
 
 trigger:
@@ -46,7 +47,7 @@ steps:
 #execute the deploy script to 
 - task: CmdLine@2
   inputs:
-    script: 'expect login.exp $(mySecret)'
+    script: 'expect login.exp $(username) $(mySecret)'
     workingDirectory: $(scriptDir)
 
 #execute the deploy script to 
