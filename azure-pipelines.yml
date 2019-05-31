@@ -41,7 +41,7 @@ steps:
 #execute the deploy script to 
 - task: CmdLine@2
   inputs:
-    script: 'expect deploy.exp $(deployArtifactDir)/$(AppName)_$(AppVersion)
+    script: 'expect deploy.exp $(deployArtifactDir)/$(AppName)_$(AppVersion)'
     workingDirectory: $(scriptDir)
 
 
